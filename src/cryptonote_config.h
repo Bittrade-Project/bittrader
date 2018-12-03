@@ -166,7 +166,7 @@ namespace config
       0x12 ,0x30, 0xF1, 0x71 , 0x61, 0x04 , 0x41, 0x61, 0x17, 0x31, 0x00, 0x82, 0x16, 0xA1, 0xA1, 0x12
     } }; // Bender's nightmare
   std::string const GENESIS_TX =
-    "01"                                                                  // version
+    "07"                                                                  // version
     "3c"                                                                  // unlock time
     "01"                                                                  // vin length
     "ff"                                                                  // vin #1
@@ -174,18 +174,18 @@ namespace config
     "01"                                                                  // vout length
     "ffffffffffff07"                                                      // output #1 amount
     "02"                                                                  // output 1 type
-    "0bf6522f9152fa26cd1fc5c022b1a9e13dab697f3acf4b4d0ca6950a867a1943"    // output #1 key
+    "1f7f414b6627ca73b31ba473874a8e0aead5e6eaf87054b7e09a29aad2ce73d1"    // output #1 key
     "21"                                                                  // extra length in bytes
     "01"                                                                  // extra pubkey tag
-    "1d92826d0656958865a035264725799f39f6988faa97d532f972895de849496d00"; // tx pubkey
+    "a7adbf59dd81ab9f6b3417c4f9962cdbfd1e9d21d029e95b3f494410c4252b8e"; // tx pubkey
 
   uint32_t const GENESIS_NONCE = 10000;
 
   namespace testnet
   {
-    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 33;
-    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 34;
-    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 73;
+    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 38;
+    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 39;
+    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 74;
     uint16_t const P2P_DEFAULT_PORT = 48680;
     uint16_t const RPC_DEFAULT_PORT = 48681;
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 48682;
@@ -196,9 +196,9 @@ namespace config
 
   namespace stagenet
   {
-    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 34;
-    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 35;
-    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 46;
+    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 35;
+    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 36;
+    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 47;
     uint16_t const P2P_DEFAULT_PORT = 58680;
     uint16_t const RPC_DEFAULT_PORT = 58681;
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 58682;
