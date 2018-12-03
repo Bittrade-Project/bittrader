@@ -1,4 +1,4 @@
-# Copyright (c) 2018, The Masari Project
+# Copyright (c) 2018, The Bittrader Project
 # Copyright (c) 2014-2018, The Monero Project
 #
 # All rights reserved.

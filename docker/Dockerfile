@@ -135,23 +135,23 @@ RUN set -ex && \
 COPY --from=builder /src/build/release/bin /usr/local/bin/
 
 # Contains the blockchain
-VOLUME /root/.masari
+VOLUME /root/.bittrader
 
 # Generate your wallet via accessing the container and run:
 # cd /wallet
-# masari-wallet-cli
+# bittrader-wallet-cli
 VOLUME /wallet
 
-EXPOSE 38080
-EXPOSE 38081
+EXPOSE 38680
+EXPOSE 38681
 
 ADD docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-CMD [ "masarid", \
+CMD [ "bittraderd", \
 		"--p2p-bind-ip=0.0.0.0", \
-		"--p2p-bind-port=38080", \
+		"--p2p-bind-port=38680", \
 		"--rpc-bind-ip=0.0.0.0", \
-		"--rpc-bind-port=38081", \
+		"--rpc-bind-port=38681", \
 		"--non-interactive", \
 		"--confirm-external-bind" ]

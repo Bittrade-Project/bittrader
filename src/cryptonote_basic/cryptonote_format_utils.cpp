@@ -675,15 +675,15 @@ namespace cryptonote
     switch (std::atomic_load(&default_decimal_point))
     {
       case 12:
-        return "masari";
+        return "bittrader";
       case 9:
-        return "millisari";
+        return "millitrade";
       case 6:
-        return "microsari";
+        return "microtrade";
       case 3:
-        return "nanosari";
+        return "nanotrade";
       case 0:
-        return "picosari";
+        return "picotrade";
       default:
         ASSERT_MES_AND_THROW("Invalid decimal point specification: " << default_decimal_point);
     }

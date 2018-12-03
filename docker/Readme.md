@@ -1,23 +1,23 @@
 # Docker container
 ## How to build
-Inside the masari root directory, execute
+Inside the bittrader root directory, execute
 ```
-docker build -t masari docker/Dockerfile .
+docker build -t bittrader docker/Dockerfile .
 ```
 
 ## How to use
 To run the daemon, use
 ```
-docker run -it masari
+docker run -it bittrader
 ```
 
-In order to use the masari wallet cli, you can use
+In order to use the bittrader wallet cli, you can use
 ```
-docker run -it masari masari-wallet-cli
+docker run -it bittrader bittrader-wallet-cli
 ```
 
 ## Docker compose example
-This example runs 2 daemons for HA and a masari wallet rpc with the specified keys
+This example runs 2 daemons for HA and a bittrader wallet rpc with the specified keys
 ```
 version: '3.7'
 
@@ -33,20 +33,20 @@ volumes:
     name: 'blockchain-{{.Task.Slot}}'
     
 services:
-  masari_daemon:
-    image: masari
-    command: ["masarid", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=38080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=38081", "--non-interactive", "--confirm-external-bind", "--restricted-rpc"]
+  bittrader_daemon:
+    image: bittrader
+    command: ["bittraderd", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=38680", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=38681", "--non-interactive", "--confirm-external-bind", "--restricted-rpc"]
     volumes:
-      - blockchain:/root/.masari
+      - blockchain:/root/.bittrader
     networks:
       - net
     ports:
-     - target: 38080
-       published: 38080
+     - target: 38680
+       published: 38680
        protocol: tcp
        mode: ingress
-     - target: 38081
-       published: 38081
+     - target: 38681
+       published: 38681
        protocol: tcp
        mode: ingress
     deploy:
@@ -55,8 +55,8 @@ services:
         parallelism: 1
         delay: 10s
   wallet:
-    image: masari
-    command: ["masari-wallet-rpc", "--wallet-file", "funding", "--password", "", "--daemon-host", "masari_daemon_masari_daemon", "--rpc-bind-port", "11182", "--disable-rpc-login", "--rpc-bind-ip=0.0.0.0", "--confirm-external-bind"]
+    image: bittrader
+    command: ["bittrader-wallet-rpc", "--wallet-file", "funding", "--password", "", "--daemon-host", "bittrader_daemon_bittrader_daemon", "--rpc-bind-port", "11182", "--disable-rpc-login", "--rpc-bind-ip=0.0.0.0", "--confirm-external-bind"]
     volumes:
       - ./wallet.keys:/funding.keys
       - ./wallet.cache:/funding.cache

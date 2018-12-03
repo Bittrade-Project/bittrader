@@ -1,33 +1,33 @@
 [Unit]
-Description=Masari Full Node
+Description=Bittrader Full Node
 After=network.target
 
 [Service]
-User=masari
-Group=masari
+User=bittrader
+Group=bittrader
 WorkingDirectory=~
-RuntimeDirectory=masari
+RuntimeDirectory=bittrader
 
 # Clearnet config
 #
 Type=forking
-PIDFile=/run/masari/masarid.pid
-ExecStart=/usr/bin/masarid --config-file /etc/masarid.conf \
-    --detach --pidfile /run/masari/masarid.pid
+PIDFile=/run/bittrader/bittraderd.pid
+ExecStart=/usr/bin/bittraderd --config-file /etc/bittraderd.conf \
+    --detach --pidfile /run/bittrader/bittraderd.pid
 
 # Tor config
 #
 ## We have to use simple, not forking, because we cannot pass --detach
 ## because stderr/stdout is not available when detached, but torsocks
 ## attempts to write to it, and fails with 'invalid argument', causing
-## masarid to fail.
+## bittraderd to fail.
 #Type=simple
 #Environment=DNS_PUBLIC=tcp
 ## The following is needed only when accessing wallet from a different
 ## host in the LAN, VPN, etc, the RPC must bind to 0.0.0.0, but
 ## by default torsocks only allows binding to localhost.
 #Environment=TORSOCKS_ALLOW_INBOUND=1
-#ExecStart=/usr/bin/torsocks /usr/bin/masarid --config-file /etc/masarid.conf \
+#ExecStart=/usr/bin/torsocks /usr/bin/bittraderd --config-file /etc/bittraderd.conf \
 #    --non-interactive
 
 Restart=always

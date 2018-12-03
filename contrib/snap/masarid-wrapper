@@ -2,7 +2,7 @@
 
 if [ ! -d "$SNAP_USER_DATA/etc" ]; then
   mkdir $SNAP_USER_DATA/etc/
-  cp -R $SNAP/etc/masarid.conf $SNAP_USER_DATA/etc/masarid.conf
+  cp -R $SNAP/etc/bittraderd.conf $SNAP_USER_DATA/etc/bittraderd.conf
 fi
 
-exec "$SNAP/bin/masarid" "$@"
+exec "$SNAP/bin/bittraderd" "$@"
