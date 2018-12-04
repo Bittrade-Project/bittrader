@@ -167,9 +167,6 @@ namespace config
     } }; // Bender's nightmare
   std::string const GENESIS_TX =
     "01"                                                                  // 
-    
-    
-    
     "3c"                                                                  // unlock time
     "01"                                                                  // vin length
     "ff"                                                                  // vin #1
@@ -177,7 +174,7 @@ namespace config
     "01"                                                                  // vout length
     "c5bd8da4c4a601"                                                      // output #1 amount
     "02"                                                                  // output 1 type
-    "1f7f414b6627ca73b31ba473874a8e0aead5e6eaf87054b7e09a29aad2ce73d1"    // output #1 key
+    "3338e0308471084cfab5a7ed5ffc019a655f878126cb03b046c7c91277167692"    // output #1 key
     "21"                                                                  // extra length in bytes
     "01"                                                                  // extra pubkey tag
     "a7adbf59dd81ab9f6b3417c4f9962cdbfd1e9d21d029e95b3f494410c4252b8e00"; // tx pubkey
