@@ -180,7 +180,7 @@ namespace config
     "1f7f414b6627ca73b31ba473874a8e0aead5e6eaf87054b7e09a29aad2ce73d1"    // output #1 key
     "21"                                                                  // extra length in bytes
     "01"                                                                  // extra pubkey tag
-    "a7adbf59dd81ab9f6b3417c4f9962cdbfd1e9d21d029e95b3f494410c4252b8e"; // tx pubkey
+    "a7adbf59dd81ab9f6b3417c4f9962cdbfd1e9d21d029e95b3f494410c4252b8e00"; // tx pubkey
 
   uint32_t const GENESIS_NONCE = 10000;
 
