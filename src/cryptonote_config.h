@@ -175,7 +175,7 @@ namespace config
     "ff"                                                                  // vin #1
     "00"                                                                  // height gen input
     "01"                                                                  // vout length
-    "ffffffffffff07"                                                      // output #1 amount
+    "c5bd8da4c4a601"                                                      // output #1 amount
     "02"                                                                  // output 1 type
     "1f7f414b6627ca73b31ba473874a8e0aead5e6eaf87054b7e09a29aad2ce73d1"    // output #1 key
     "21"                                                                  // extra length in bytes
