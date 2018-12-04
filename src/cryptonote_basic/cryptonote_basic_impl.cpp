@@ -97,6 +97,12 @@ namespace cryptonote {
 
     uint64_t full_reward_zone = get_min_block_size(version);
 
+    const uint64_t premine = 1000000000000000000;
+    if (height == 1 && already_generated_coins < premine) {
+      reward = premine;
+      return true;
+    }
+
     //make it soft
     if (median_size < full_reward_zone) {
       median_size = full_reward_zone;
