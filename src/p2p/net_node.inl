@@ -390,10 +390,10 @@ namespace nodetool
     }
     else
     {
-      full_addrs.insert("5.135.157.4:38680");
-      full_addrs.insert("94.23.49.75:38680");
-      full_addrs.insert("50.17.174.202:38680");
-      full_addrs.insert("52.0.168.169:38680");
+      full_addrs.insert("207.154.202.185:38680");
+      full_addrs.insert("46.101.113.212:38680");
+      full_addrs.insert("207.154.201.211:38680");
+      full_addrs.insert("165.227.128.243:38680");
     }
     return full_addrs;
   }
