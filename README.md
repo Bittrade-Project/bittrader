@@ -47,11 +47,17 @@ As with many development projects, the repository on Github is considered to be 
 
 Bittrader is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially.
 
-The Bittrader donation address is: `5nYWvcvNThsLaMmrsfpRLBRou1RuGtLabUwYH7v6b88bem2J4aUwsoF33FbJuqMDgQjpDRTSpLCZu3dXpqXicE2uSWS4LUP` (viewkey: `99e21e00cce073c126e9aed800c9e2e82518534b3924b035a29436ff4f75bc0c`)
-
 The Monero donation address is: `4A57eA3so6bEE8FUcaN1KtMXD3sxjjbvcKD3MF1pUgRi5PNHTpB7sYN2DmJv3EXxtZCWeG88tsVLzdfZJcmUFm52SbrfJWr` (viewkey: `c7a7c141581ac4436ba8bfb81dd67234720c565c696ef154a25c7e7314ce4b08`)
 
-The Bitcoin donation address is: `1J1he4qtTuNpCxyEBozkeKfDpoeYxfE3rj`
+The Bittrader donation address is: `5jt8mVBMgPS7qgpDvXD4P6DQfpFPrmwXxaXfDXydb5JRBHos2CbCPVbCVwxFKbUqMnjRcoP2E6JAiFYKrhZp5RNK7ayL2R3`
+
+The Bitcoin donation address is: `3HraZ46i6yeEzd6rCzUyKuTRqjvQ4q1Rj8`
+The Bitcoin Cash donation address is: `qq4m9hpr5d0zhftaudvduzyf63l76j57xg7xpkvz95`
+
+The Ethereum donation address is: `0xdaeD41B190b08d64bcA9C5207D474b983BFb1D65`
+The Ethereum Classic donation address is:`0xca3c8d9Df173A7b77c9090Fb78E66960d8a3D2f3`
+
+The Litecoin donation address is: `MK4dQ7qHxJq5mSSnkp6cpvgcyQFzmJyQBY`
 
 There are a few mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=2159114.740). Others can be found on [BittraderPools](http://bittraderpools.org/) and [CryptoIsMe](https://cryptoisme.com/coin/bittrader).
 
