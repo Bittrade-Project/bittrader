@@ -84,7 +84,7 @@ TEST(AddressFromTXT, Failure)
 
 TEST(AddressFromURL, Success)
 {
-  const std::string addr = TRDBUCC_DONATION_ADDR;
+  const std::string addr = BITTRADER_DONATION_ADDR;
   
   bool dnssec_result = false;
 
