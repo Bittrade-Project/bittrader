@@ -82,8 +82,6 @@ public:
   bool print_height(const std::vector<std::string>& args);
 
   bool print_block(const std::vector<std::string>& args);
-  
-  bool print_uncle_block(const std::vector<std::string>& args);
 
   bool print_transaction(const std::vector<std::string>& args);
 

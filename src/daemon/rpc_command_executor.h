@@ -94,8 +94,6 @@ public:
   bool print_block_by_hash(crypto::hash block_hash);
 
   bool print_block_by_height(uint64_t height);
-  
-  bool print_uncle_block(crypto::hash uncle_hash);
 
   bool print_transaction(crypto::hash transaction_hash, bool include_hex, bool include_json);
 
@@ -107,7 +105,7 @@ public:
 
   bool print_transaction_pool_stats();
 
-  bool start_mining(std::string address, uint64_t num_threads, cryptonote::network_type nettype, bool do_background_mining = false, bool ignore_battery = false);
+  bool start_mining(cryptonote::account_public_address address, uint64_t num_threads, cryptonote::network_type nettype, bool do_background_mining = false, bool ignore_battery = false);
 
   bool stop_mining();
 

@@ -202,7 +202,7 @@ namespace cryptonote
       *
       * @note see Blockchain::create_block_template
       */
-     virtual bool get_block_template(block& b, std::string adr, difficulty_type& diffic, uint64_t& height, uint64_t& expected_reward, const blobdata& ex_nonce);
+     virtual bool get_block_template(block& b, const account_public_address& adr, difficulty_type& diffic, uint64_t& height, uint64_t& expected_reward, const blobdata& ex_nonce);
 
      /**
       * @brief called when a transaction is relayed
@@ -367,13 +367,6 @@ namespace cryptonote
       * @note see Blockchain::get_block_by_hash
       */
      bool get_block_by_hash(const crypto::hash &h, block &blk, bool *orphan = NULL) const;
-
-      /**
-      * @copydoc fetch an uncle block from the DB
-      *
-      * @note returns false if block DNE
-      */
-      bool get_uncle_by_hash(const crypto::hash &h, block &uncle) const;
 
      /**
       * @copydoc Blockchain::get_alternative_blocks
@@ -555,16 +548,6 @@ namespace cryptonote
       * @note see Blockchain::get_block_cumulative_difficulty
       */
      difficulty_type get_block_cumulative_difficulty(uint64_t height) const;
-     
-     /**
-      * @brief get a single block's weight
-      */
-     difficulty_type get_block_weight(uint64_t height) const;
-     
-     /**
-      * @brief get an uncle block's individual weight
-      */
-     difficulty_type get_uncle_weight(uint64_t height) const;
 
      /**
       * @copydoc Blockchain::get_random_outs_for_amounts
@@ -754,13 +737,6 @@ namespace cryptonote
       * @return the number of blocks to sync in one go
       */
      std::pair<uint64_t, uint64_t> get_coinbase_tx_sum(const uint64_t start_offset, const size_t count);
-     
-     /**
-      * @copydoc BlockchainDB::get_already_generated_coins
-      *
-      * @note BlockchainDB::get_already_generated_coins
-      */
-     uint64_t get_generated_coins(uint64_t height) const;
      
      /**
       * @brief get the network type we're on

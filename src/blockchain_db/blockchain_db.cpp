@@ -191,7 +191,6 @@ void BlockchainDB::add_transaction(const crypto::hash& blk_hash, const transacti
 uint64_t BlockchainDB::add_block( const block& blk
                                 , const size_t& block_size
                                 , const difficulty_type& cumulative_difficulty
-                                , const difficulty_type& cumulative_weight
                                 , const uint64_t& coins_generated
                                 , const std::vector<transaction>& txs
                                 )
@@ -226,7 +225,7 @@ uint64_t BlockchainDB::add_block( const block& blk
 
   // call out to subclass implementation to add the block & metadata
   time1 = epee::misc_utils::get_tick_count();
-  add_block(blk, block_size, cumulative_difficulty, cumulative_weight, coins_generated, blk_hash);
+  add_block(blk, block_size, cumulative_difficulty, coins_generated, blk_hash);
   TIME_MEASURE_FINISH(time1);
   time_add_block1 += time1;
 
@@ -255,9 +254,7 @@ void BlockchainDB::pop_block(block& blk, std::vector<transaction>& txs)
     txs.push_back(get_tx(h));
     remove_transaction(h);
   }
-  crypto::hash tx_hash = get_transaction_hash(blk.miner_tx);
-  MDEBUG("Removing miner tx" << tx_hash);
-  remove_transaction(tx_hash);
+  remove_transaction(get_transaction_hash(blk.miner_tx));
 }
 
 bool BlockchainDB::is_open() const
@@ -281,33 +278,24 @@ void BlockchainDB::remove_transaction(const crypto::hash& tx_hash)
   remove_transaction_data(tx_hash, tx);
 }
 
-static block get_block_from_blob(const blobdata& bd, const std::string& type)
+block BlockchainDB::get_block_from_height(const uint64_t& height) const
 {
+  blobdata bd = get_block_blob_from_height(height);
   block b;
   if (!parse_and_validate_block_from_blob(bd, b))
-    throw DB_ERROR(("Failed to parse " + type + " from blob retrieved from the db").c_str());
+    throw DB_ERROR("Failed to parse block from blob retrieved from the db");
 
   return b;
 }
 
-block BlockchainDB::get_uncle_from_height(const uint64_t& height) const
-{
-  return get_block_from_blob(get_uncle_blob_from_height(height), "uncle");
-}
-
-block BlockchainDB::get_block_from_height(const uint64_t& height) const
-{
-  return get_block_from_blob(get_block_blob_from_height(height), "block");
-}
-
-block BlockchainDB::get_uncle(const crypto::hash& h) const
-{
-  return get_block_from_blob(get_uncle_blob(h), "uncle");
-}
-
 block BlockchainDB::get_block(const crypto::hash& h) const
 {
-  return get_block_from_blob(get_block_blob(h), "block");
+  blobdata bd = get_block_blob(h);
+  block b;
+  if (!parse_and_validate_block_from_blob(bd, b))
+    throw DB_ERROR("Failed to parse block from blob retrieved from the db");
+
+  return b;
 }
 
 bool BlockchainDB::get_tx(const crypto::hash& h, cryptonote::transaction &tx) const
@@ -319,26 +307,6 @@ bool BlockchainDB::get_tx(const crypto::hash& h, cryptonote::transaction &tx) co
     throw DB_ERROR("Failed to parse transaction from blob retrieved from the db");
 
   return true;
-}
-
-difficulty_type BlockchainDB::get_block_cumulative_weight(const crypto::hash& id) const
-{
-    return get_block_cumulative_weight(get_block_height(id));
-}
-
-difficulty_type BlockchainDB::get_block_cumulative_difficulty(const crypto::hash& id) const
-{
-    return get_block_cumulative_difficulty(get_block_height(id));
-}
-
-difficulty_type BlockchainDB::get_block_difficulty(const crypto::hash& id) const
-{
-  return get_block_difficulty(get_block_height(id));
-}
-
-difficulty_type BlockchainDB::get_uncle_difficulty(const crypto::hash& id) const
-{
-  return get_block_difficulty(get_uncle_height(id));
 }
 
 transaction BlockchainDB::get_tx(const crypto::hash& h) const

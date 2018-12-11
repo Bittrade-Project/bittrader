@@ -1559,8 +1559,8 @@ Cette transaction sera déverrouillée au bloc %llu, dans approximativement %s j
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1622"/>
-        <source>Donate &lt;amount&gt; to the development team (donate.bittrader.io).</source>
-        <translation>Donner &lt;montant&gt; à l&apos;équipe de développement (donate.bittrader.io).</translation>
+        <source>Donate &lt;amount&gt; to the development team (donate.trdbu.cc).</source>
+        <translation>Donner &lt;montant&gt; à l&apos;équipe de développement (donate.trdbu.cc).</translation>
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1625"/>
@@ -1702,7 +1702,7 @@ Si l&apos;argument &quot;tag_description&quot; est spécifié, le texte arbitrai
    Set the fee too default/unimportant/normal/elevated/priority.
  confirm-missing-payment-id &lt;1|0&gt;
  ask-password &lt;1|0&gt;
- unit &lt;bittrader|millitrade|microtrade|nanotrade|picotrade&gt;
+ unit &lt;bittrader|millitrd|microtrd|nanotrd|picotrd&gt;
    Set the default bittrader (sub-)unit.
  min-outputs-count [n]
    Try to keep at least that many outputs of value at least min-outputs-value.
@@ -1737,7 +1737,7 @@ Si l&apos;argument &quot;tag_description&quot; est spécifié, le texte arbitrai
    Utiliser les frais pour la priorité par défaut/peu importante/normale/élevée/prioritaire.
  confirm-missing-payment-id &lt;1|0&gt;
  ask-password &lt;1|0&gt;
- unit &lt;bittrader|millitrade|microtrade|nanotrade|picotrade&gt;
+ unit &lt;bittrader|millitrd|microtrd|nanotrd|picotrd&gt;
    Définir la (sous-)unité bittrader par défaut.
  min-outputs-count [n]
    Essayer de garder au moins ce nombre de sorties d&apos;une valeur d&apos;au moins min-outputs-value.
@@ -2610,8 +2610,8 @@ Attention : Certaines clés d&apos;entrées étant dépensées sont issues de <
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1923"/>
-        <source>bittrader, millitrade, microtrade, nanotrade, picotrade</source>
-        <translation>bittrader, millitrade, microtrade, nanotrade, picotrade</translation>
+        <source>bittrader, millitrd, microtrd, nanotrd, picotrd</source>
+        <translation>bittrader, millitrd, microtrd, nanotrd, picotrd</translation>
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1975"/>

@@ -143,6 +143,11 @@ namespace cryptonote
   , "Check for new versions of bittrader: [disabled|notify|download|update]"
   , "notify"
   };
+  static const command_line::arg_descriptor<bool> arg_fluffy_blocks  = {
+    "fluffy-blocks"
+  , "Relay blocks as fluffy blocks (obsolete, now default)"
+  , true
+  };
   static const command_line::arg_descriptor<bool> arg_no_fluffy_blocks  = {
     "no-fluffy-blocks"
   , "Relay blocks as normal blocks"
@@ -254,6 +259,7 @@ namespace cryptonote
     command_line::add_arg(desc, arg_show_time_stats);
     command_line::add_arg(desc, arg_block_sync_size);
     command_line::add_arg(desc, arg_check_updates);
+    command_line::add_arg(desc, arg_fluffy_blocks);
     command_line::add_arg(desc, arg_no_fluffy_blocks);
     command_line::add_arg(desc, arg_test_dbg_lock_sleep);
     command_line::add_arg(desc, arg_offline);
@@ -298,6 +304,8 @@ namespace cryptonote
     m_fluffy_blocks_enabled = !get_arg(vm, arg_no_fluffy_blocks);
     m_offline = get_arg(vm, arg_offline);
     m_disable_dns_checkpoints = get_arg(vm, arg_disable_dns_checkpoints);
+    if (!command_line::is_arg_defaulted(vm, arg_fluffy_blocks))
+      MWARNING(arg_fluffy_blocks.name << " is obsolete, it is now default");
 
     if (command_line::get_arg(vm, arg_test_drop_download) == true)
       test_drop_download();
@@ -945,11 +953,6 @@ namespace cryptonote
     return std::pair<uint64_t, uint64_t>(emission_amount, total_fee_amount);
   }
   //-----------------------------------------------------------------------------------------------
-  uint64_t core::get_generated_coins(uint64_t height) const
-  {
-    return m_blockchain_storage.get_db().get_block_already_generated_coins(height);
-  }
-  //-----------------------------------------------------------------------------------------------
   bool core::check_tx_inputs_keyimages_diff(const transaction& tx) const
   {
     std::unordered_set<crypto::key_image> ki;
@@ -1058,7 +1061,7 @@ namespace cryptonote
     m_mempool.set_relayed(txs);
   }
   //-----------------------------------------------------------------------------------------------
-  bool core::get_block_template(block& b, std::string adr, difficulty_type& diffic, uint64_t& height, uint64_t& expected_reward, const blobdata& ex_nonce)
+  bool core::get_block_template(block& b, const account_public_address& adr, difficulty_type& diffic, uint64_t& height, uint64_t& expected_reward, const blobdata& ex_nonce)
   {
     return m_blockchain_storage.create_block_template(b, adr, diffic, height, expected_reward, ex_nonce);
   }
@@ -1259,20 +1262,6 @@ namespace cryptonote
     return m_blockchain_storage.get_db().get_block_cumulative_difficulty(height);
   }
   //-----------------------------------------------------------------------------------------------
-  difficulty_type core::get_block_weight(uint64_t height) const
-  {
-    difficulty_type diff, weight, cum_diff, cum_weight;
-    m_blockchain_storage.get_db().get_height_info(height, diff, weight, cum_diff, cum_weight);
-    return weight;
-  }
-  //-----------------------------------------------------------------------------------------------
-  difficulty_type core::get_uncle_weight(uint64_t height) const
-  {
-    difficulty_type diff, weight, cum_diff, cum_weight;
-    m_blockchain_storage.get_db().get_uncle_height_info(height, diff, weight, cum_diff, cum_weight);
-    return weight;
-  }
-  //-----------------------------------------------------------------------------------------------
   size_t core::get_pool_transactions_count() const
   {
     return m_mempool.get_transactions_count();
@@ -1351,20 +1340,6 @@ namespace cryptonote
     return m_blockchain_storage.get_block_by_hash(h, blk, orphan);
   }
   //-----------------------------------------------------------------------------------------------
-  bool core::get_uncle_by_hash(const crypto::hash &h, block &uncle) const
-  {
-    try 
-    {
-      uncle = m_blockchain_storage.get_db().get_uncle(h);
-      return true;
-    }
-    catch (const BLOCK_DNE& e)
-    {
-      MDEBUG("No uncle block with hash " << h << " exists in the database");
-      return false;
-    }
-  }
-  //-----------------------------------------------------------------------------------------------
   std::string core::print_pool(bool short_format) const
   {
     return m_mempool.print_pool(short_format);
@@ -1415,6 +1390,11 @@ namespace cryptonote
         MCLOG_RED(level, "global", "**********************************************************************");
         MCLOG_RED(level, "global", "Last scheduled hard fork is too far in the past.");
         MCLOG_RED(level, "global", "We are most likely forked from the network. Daemon update needed now.");
+        MCLOG_RED(level, "global", "**********************************************************************");
+        break;
+      case HardFork::UpdateNeeded:
+        MCLOG_RED(level, "global", "**********************************************************************");
+        MCLOG_RED(level, "global", "Last scheduled hard fork time shows a daemon update is needed soon.");
         MCLOG_RED(level, "global", "**********************************************************************");
         break;
       default:

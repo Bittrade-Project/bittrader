@@ -1677,7 +1677,7 @@ namespace Language
         "zoccolo",
         "zolfo",
         "zombie",
-        "zucchero"
+        "trdhero"
       }), 4)
     {
       populate_maps();

@@ -84,11 +84,11 @@ TEST(AddressFromTXT, Failure)
 
 TEST(AddressFromURL, Success)
 {
-  const std::string addr = BITTRADER_DONATION_ADDR;
+  const std::string addr = TRDBUCC_DONATION_ADDR;
   
   bool dnssec_result = false;
 
-  std::vector<std::string> addresses = tools::dns_utils::addresses_from_url("donate.bittrader.io", dnssec_result);
+  std::vector<std::string> addresses = tools::dns_utils::addresses_from_url("donate.trdbu.cc", dnssec_result);
 
   EXPECT_EQ(1, addresses.size());
   if (addresses.size() == 1)
@@ -97,7 +97,7 @@ TEST(AddressFromURL, Success)
   }
 
   // OpenAlias address with an @ instead of first .
-  addresses = tools::dns_utils::addresses_from_url("donate@bittrader.io", dnssec_result);
+  addresses = tools::dns_utils::addresses_from_url("donate@trdbu.cc", dnssec_result);
   EXPECT_EQ(1, addresses.size());
   if (addresses.size() == 1)
   {

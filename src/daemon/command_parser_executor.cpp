@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "common/dns_utils.h"
-#include "common/command_line.h"
 #include "daemon/command_parser_executor.h"
 
 #undef MONERO_DEFAULT_LOG_CATEGORY
@@ -186,24 +185,6 @@ bool t_command_parser_executor::print_block(const std::vector<std::string>& args
   return false;
 }
 
-bool t_command_parser_executor::print_uncle_block(const std::vector<std::string>& args)
-{
-  if (args.empty())
-  {
-    std::cout << "expected: print_uncle_block (<uncle_block_hash>)" << std::endl;
-    return false;
-  }
-  
-  const std::string& arg = args.front();
-  crypto::hash uncle_hash;
-  if (parse_hash256(arg, uncle_hash))
-  {
-    return m_executor.print_uncle_block(uncle_hash);
-  }
-  
-  return false;
-}
-
 bool t_command_parser_executor::print_transaction(const std::vector<std::string>& args)
 {
   bool include_hex = false;
@@ -327,7 +308,11 @@ bool t_command_parser_executor::start_mining(const std::vector<std::string>& arg
       nettype = cryptonote::TESTNET;
     }
   }
-
+  if (info.is_subaddress)
+  {
+    tools::fail_msg_writer() << "subaddress for mining reward is not yet supported!" << std::endl;
+    return true;
+  }
   if(nettype != cryptonote::MAINNET)
     std::cout << "Mining to a " << (nettype == cryptonote::TESTNET ? "testnet" : "stagenet") << "address, make sure this is intentional!" << std::endl;
   uint64_t threads_count = 1;
@@ -340,26 +325,12 @@ bool t_command_parser_executor::start_mining(const std::vector<std::string>& arg
   
   if(args.size() == 4)
   {
-    if(args[3] == "true" || command_line::is_yes(args[3]) || args[3] == "1")
-    {
-      ignore_battery = true;
-    }
-    else if(args[3] != "false" && !command_line::is_no(args[3]) && args[3] != "0")
-    {
-      return false;
-    }
+    ignore_battery = args[3] == "true";
   }  
   
   if(args.size() >= 3)
   {
-    if(args[2] == "true" || command_line::is_yes(args[2]) || args[2] == "1")
-    {
-      do_background_mining = true;
-    }
-    else if(args[2] != "false" && !command_line::is_no(args[2]) && args[2] != "0")
-    {
-      return false;
-    }
+    do_background_mining = args[2] == "true";
   }
   
   if(args.size() >= 2)
@@ -368,7 +339,7 @@ bool t_command_parser_executor::start_mining(const std::vector<std::string>& arg
     threads_count = (ok && 0 < threads_count) ? threads_count : 1;
   }
 
-  m_executor.start_mining(args.front(), threads_count, nettype, do_background_mining, ignore_battery);
+  m_executor.start_mining(info.address, threads_count, nettype, do_background_mining, ignore_battery);
 
   return true;
 }

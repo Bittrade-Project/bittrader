@@ -1550,7 +1550,7 @@ This transaction will unlock on block %llu, in approximately %s days (assuming 2
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1622"/>
-        <source>Donate &lt;amount&gt; to the development team (donate.bittrader.io).</source>
+        <source>Donate &lt;amount&gt; to the development team (donate.trdbu.cc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1681,7 +1681,7 @@ If the &quot;tag_description&quot; argument is specified, the tag &lt;tag_name&g
    Set the fee too default/unimportant/normal/elevated/priority.
  confirm-missing-payment-id &lt;1|0&gt;
  ask-password &lt;1|0&gt;
- unit &lt;bittrader|millitrade|microtrade|nanotrade|picotrade&gt;
+ unit &lt;bittrader|millitrd|microtrd|nanotrd|picotrd&gt;
    Set the default bittrader (sub-)unit.
  min-outputs-count [n]
    Try to keep at least that many outputs of value at least min-outputs-value.
@@ -2539,7 +2539,7 @@ Warning: Some input keys being spent are from </source>
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1923"/>
-        <source>bittrader, millitrade, microtrade, nanotrade, picotrade</source>
+        <source>bittrader, millitrd, microtrd, nanotrd, picotrd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

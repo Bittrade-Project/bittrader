@@ -52,7 +52,7 @@
 #undef MONERO_DEFAULT_LOG_CATEGORY
 #define MONERO_DEFAULT_LOG_CATEGORY "wallet.simplewallet"
 
-constexpr const char BITTRADER_DONATION_ADDR[] = "5nYWvcvNThsLaMmrsfpRLBRou1RuGtLabUwYH7v6b88bem2J4aUwsoF33FbJuqMDgQjpDRTSpLCZu3dXpqXicE2uSWS4LUP";
+constexpr const char TRDBUCC_DONATION_ADDR[] = "ZuCCHVeMSiuR4dFvUUJr1Hj7zuiZLiXk3YAj1p41CuRC4LQieVamm2M4n6AFfSVYSfb52nqEe5rCxCTG7GgVHM646D92kksG2y";
 
 /*!
  * \namespace cryptonote
@@ -269,7 +269,7 @@ namespace cryptonote
       void update(uint64_t height, bool force = false)
       {
         auto current_time = std::chrono::system_clock::now();
-        const auto node_update_threshold = std::chrono::seconds(DIFFICULTY_TARGET_V8 / 2);
+        const auto node_update_threshold = std::chrono::seconds(DIFFICULTY_TARGET / 2); 
         if (node_update_threshold < current_time - m_blockchain_height_update_time || m_blockchain_height <= height)
         {
           update_blockchain_height();

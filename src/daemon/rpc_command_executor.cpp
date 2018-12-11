@@ -71,23 +71,10 @@ namespace {
       << "previous hash: " << header.prev_hash << std::endl
       << "nonce: " << boost::lexical_cast<std::string>(header.nonce) << std::endl
       << "is orphan: " << header.orphan_status << std::endl
-      << "is uncle: " << header.uncle_status << std::endl
       << "height: " << boost::lexical_cast<std::string>(header.height) << std::endl
       << "depth: " << boost::lexical_cast<std::string>(header.depth) << std::endl
       << "hash: " << header.hash << std::endl
       << "difficulty: " << boost::lexical_cast<std::string>(header.difficulty) << std::endl
-      << "weight: " << boost::lexical_cast<std::string>(header.weight) << std::endl
-      << "reward: " << boost::lexical_cast<std::string>(header.reward);
-  }
-  
-  void print_uncle_header(cryptonote::uncle_header_response const & header)
-  {
-    tools::success_msg_writer()
-      << "height: " << boost::lexical_cast<std::string>(header.height) << std::endl
-      << "depth: " << boost::lexical_cast<std::string>(header.depth) << std::endl
-      << "hash: " << header.hash << std::endl
-      << "difficulty: " << boost::lexical_cast<std::string>(header.difficulty) << std::endl
-      << "weight: " << boost::lexical_cast<std::string>(header.weight) << std::endl
       << "reward: " << boost::lexical_cast<std::string>(header.reward);
   }
 
@@ -682,7 +669,7 @@ bool t_rpc_command_executor::print_block_by_hash(crypto::hash block_hash) {
   {
     if (!m_rpc_server->on_get_block(req, res, error_resp) || res.status != CORE_RPC_STATUS_OK)
     {
-      tools::fail_msg_writer() << make_error(fail_message, error_resp.message);
+      tools::fail_msg_writer() << make_error(fail_message, res.status);
       return true;
     }
   }
@@ -713,43 +700,12 @@ bool t_rpc_command_executor::print_block_by_height(uint64_t height) {
   {
     if (!m_rpc_server->on_get_block(req, res, error_resp) || res.status != CORE_RPC_STATUS_OK)
     {
-      tools::fail_msg_writer() << make_error(fail_message, error_resp.message);
-      return true;
-    }
-  }
-
-  print_block_header(res.block_header);
-  tools::success_msg_writer() << res.json << ENDL;
-
-  return true;
-}
-
-bool t_rpc_command_executor::print_uncle_block(crypto::hash uncle_hash) {
-  cryptonote::COMMAND_RPC_GET_UNCLE_BLOCK::request req;
-  cryptonote::COMMAND_RPC_GET_UNCLE_BLOCK::response res;
-  epee::json_rpc::error error_resp;
-
-  req.hash = epee::string_tools::pod_to_hex(uncle_hash);
-
-  std::string fail_message = "Unsuccessful";
-
-  if (m_is_rpc)
-  {
-    if (!m_rpc_client->json_rpc_request(req, res, "get_uncle_block", fail_message.c_str()))
-    {
-      return true;
-    }
-  }
-  else
-  {
-    if (!m_rpc_server->on_get_uncle_block(req, res, error_resp) || res.status != CORE_RPC_STATUS_OK)
-    {
       tools::fail_msg_writer() << make_error(fail_message, res.status);
       return true;
     }
   }
 
-  print_uncle_header(res.header_response);
+  print_block_header(res.block_header);
   tools::success_msg_writer() << res.json << ENDL;
 
   return true;
@@ -1043,7 +999,7 @@ bool t_rpc_command_executor::print_transaction_pool_stats() {
   else
   {
     uint64_t backlog = (res.pool_stats.bytes_total + full_reward_zone - 1) / full_reward_zone;
-    backlog_message = (boost::format("estimated %u block (%u minutes) backlog") % backlog % (backlog * DIFFICULTY_TARGET_V8 / 60)).str();
+    backlog_message = (boost::format("estimated %u block (%u minutes) backlog") % backlog % (backlog * DIFFICULTY_TARGET / 60)).str();
   }
 
   tools::msg_writer() << n_transactions << " tx(es), " << res.pool_stats.bytes_total << " bytes total (min " << res.pool_stats.bytes_min << ", max " << res.pool_stats.bytes_max << ", avg " << avg_bytes << ", median " << res.pool_stats.bytes_med << ")" << std::endl
@@ -1081,10 +1037,10 @@ bool t_rpc_command_executor::print_transaction_pool_stats() {
   return true;
 }
 
-bool t_rpc_command_executor::start_mining(std::string address, uint64_t num_threads, cryptonote::network_type nettype, bool do_background_mining, bool ignore_battery) {
+bool t_rpc_command_executor::start_mining(cryptonote::account_public_address address, uint64_t num_threads, cryptonote::network_type nettype, bool do_background_mining, bool ignore_battery) {
   cryptonote::COMMAND_RPC_START_MINING::request req;
   cryptonote::COMMAND_RPC_START_MINING::response res;
-  req.miner_address = address;
+  req.miner_address = cryptonote::get_account_address_as_str(nettype, false, address);
   req.threads_count = num_threads;
   req.do_background_mining = do_background_mining;
   req.ignore_battery = ignore_battery;
@@ -1709,7 +1665,7 @@ bool t_rpc_command_executor::alt_chain_info()
   {
     uint64_t start_height = (chain.height - chain.length + 1);
     tools::msg_writer() << chain.length << " blocks long, from height " << start_height << " (" << (ires.height - start_height - 1)
-        << " deep), diff " << chain.difficulty << ", weight " << chain.weight << ": " << chain.block_hash;
+        << " deep), diff " << chain.difficulty << ": " << chain.block_hash;
   }
   return true;
 }
