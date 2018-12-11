@@ -1559,8 +1559,8 @@ Denna transaktion låses upp vid block %llu, om ungefär %s dagar (förutsatt en
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1622"/>
-        <source>Donate &lt;amount&gt; to the development team (donate.trdbu.cc).</source>
-        <translation>Donera &lt;belopp&gt; till utvecklingsteamet (donate.trdbu.cc).</translation>
+        <source>Donate &lt;amount&gt; to the development team (donate.bittrader.io).</source>
+        <translation>Donera &lt;belopp&gt; till utvecklingsteamet (donate.bittrader.io).</translation>
     </message>
     <message>
         <location filename="../src/simplewallet/simplewallet.cpp" line="1625"/>

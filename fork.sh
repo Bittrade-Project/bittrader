@@ -31,7 +31,7 @@ read -p "Stagenet Port [5808]0):" defport4
 
 find . -type f -not -path './.git/*' -exec sed -i "s/Bittrader/$Name/g; s/bittrader/$name/g; s/TRD/$TICKER/g; s/TRDBUCC/$NAME/g; s/Trd/$Ticker/g; s/trd/$ticker/g; s/millitrd/$milli/g; s/microtrd/$micro/g; s/nanotrd/$nano/g; s/picotrd/$pico/g; s/:2868/:$defport1/g; s/:3868/:$defport2/g; s/:4868/:$defport3/g; s/:5868/:$defport4/g;" "{}" \;
 
-find . -type f -not -path './.git/*' -exec sed -i "s/trdbu.cc/$website/g;" "{}" \;
+find . -type f -not -path './.git/*' -exec sed -i "s/bittrader.io/$website/g;" "{}" \;
 
 find . -type f -not -path './.git/*' -exec sed -i "s/PORT = 3868/PORT = $defport2/g; s/port=3868/port=$defport2/g; s/EXPOSE 3868/EXPOSE $defport2/g; s/published: 3868/published: $defport2/g; s/target: 3868/target: $defport2/g;" "{}" \;
 
