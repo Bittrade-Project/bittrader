@@ -1741,13 +1741,13 @@ bool simple_wallet::set_unit(const std::vector<std::string> &args/* = std::vecto
 
   if (unit == "bittrader")
     decimal_point = CRYPTONOTE_DISPLAY_DECIMAL_POINT;
-  else if (unit == "millitrd")
+  else if (unit == "millitrade")
     decimal_point = CRYPTONOTE_DISPLAY_DECIMAL_POINT - 3;
-  else if (unit == "microtrd")
+  else if (unit == "microtrade")
     decimal_point = CRYPTONOTE_DISPLAY_DECIMAL_POINT - 6;
-  else if (unit == "nanotrd")
+  else if (unit == "nanotrade")
     decimal_point = CRYPTONOTE_DISPLAY_DECIMAL_POINT - 9;
-  else if (unit == "picotrd")
+  else if (unit == "picotrade")
     decimal_point = 0;
   else
   {
@@ -2097,7 +2097,7 @@ simple_wallet::simple_wallet()
                                   "  Set the fee too default/low/medium/high.\n "
                                   "confirm-missing-payment-id <1|0>\n "
                                   "ask-password <1|0>\n "
-                                  "unit <bittrader|millitrd|microtrd|nanotrd|picotrd>\n "
+                                  "unit <bittrader|millitrade|microtrade|nanotrade|picotrade>\n "
                                   "  Set the default bittrader (sub-)unit.\n "
                                   "min-outputs-count [n]\n "
                                   "  Try to keep at least that many outputs of value at least min-outputs-value.\n "
@@ -2360,7 +2360,7 @@ bool simple_wallet::set_variable(const std::vector<std::string> &args)
     CHECK_SIMPLE_VARIABLE("priority", set_default_priority, tr("0, 1, 2, or 3"));
     CHECK_SIMPLE_VARIABLE("confirm-missing-payment-id", set_confirm_missing_payment_id, tr("0 or 1"));
     CHECK_SIMPLE_VARIABLE("ask-password", set_ask_password, tr("0 or 1"));
-    CHECK_SIMPLE_VARIABLE("unit", set_unit, tr("bittrader, millitrd, microtrd, nanotrd, picotrd"));
+    CHECK_SIMPLE_VARIABLE("unit", set_unit, tr("bittrader, millitrade, microtrade, nanotrade, picotrade"));
     CHECK_SIMPLE_VARIABLE("min-outputs-count", set_min_output_count, tr("unsigned integer"));
     CHECK_SIMPLE_VARIABLE("min-outputs-value", set_min_output_value, tr("amount"));
     CHECK_SIMPLE_VARIABLE("merge-destinations", set_merge_destinations, tr("0 or 1"));

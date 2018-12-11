@@ -677,13 +677,13 @@ namespace cryptonote
       case 12:
         return "bittrader";
       case 9:
-        return "millitrd";
+        return "millitrade";
       case 6:
-        return "microtrd";
+        return "microtrade";
       case 3:
-        return "nanotrd";
+        return "nanotrade";
       case 0:
-        return "picotrd";
+        return "picotrade";
       default:
         ASSERT_MES_AND_THROW("Invalid decimal point specification: " << default_decimal_point);
     }
