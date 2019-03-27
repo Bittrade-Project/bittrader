@@ -93,7 +93,7 @@ static const struct {
   { 1, 1, 0, 1504387246 },
   { 5, 60, 0, 1505387246 },
   { 6, 100, 0, 1525277953 },
-  { 11, 69860, 0, 1552944793 },
+  { 7, 74584, 0, 1553505218 },
 };
 
 static const struct {
@@ -103,6 +103,7 @@ static const struct {
   time_t time;
 } testnet_hard_forks[] = {
   { 5, 1, 0, 1504374656 },
+  { 7, 3, 0, 1553505218 },
 };
 
 static const struct {
